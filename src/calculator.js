@@ -2,16 +2,29 @@ function calculator(...args) {
     let num = 0;
     let operator = '+';
     let stack = [];
+    // we check the first and last element of the array to make sure they are numbers
+    if (typeof args[0] != 'number' || typeof args[args.length - 1] != 'number'
+        || args.length < 3
+    ) {
+        throw new Error('Invalid input type');
+    }
+
     // we rach the end of the array +1 so we can add the last number to the stack
     // and then perform the final operation on it.
     for (let i = 0; i <= args.length; i++) {
         if (i % 2 === 0 && typeof args[i] !== 'number') {
             throw new Error('Invalid input type');
         }
-        
+        if (i % 2 !== 0 && typeof args[i] === 'number') {
+            throw new Error('Invalid input type');
+        }
         if (typeof args[i] == 'number') {
-            num = args[i] % 1001;
+            if(args[i] > 1000){
+                continue;
+            }
+            num = args[i];
         } else {
+            if(args[i-1] < 1001)
             switch (operator) {
                 case '+':
                     stack.push(num);

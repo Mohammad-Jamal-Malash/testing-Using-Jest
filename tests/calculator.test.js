@@ -60,7 +60,7 @@ describe('Calculator', () => {
         });
         // Test case: Invalid input type
         it('should throw an error for invalid input types', () => {
-            expect(() => calc('2', '+', 3)).toThrow('Invalid input type');
+            expect(() => calc('2', '+', 3)).toThrow('Invalid input');
         });
         // Test case: Invalid input
         it('should throw an error for invalid input', () => {
@@ -82,7 +82,7 @@ describe('Calculator', () => {
         });
         // test case: all input is zeros
         it('should return 0 for all input is zeros', () => {
-            expect(calc(0, 0, 0)).toBe(0);
+            expect(() => calc(0, 0, 0)).toThrow('Invalid input');
         });
 
         // test case: all operators are the same
@@ -112,12 +112,44 @@ describe('Calculator', () => {
 
         // test case: operator is a string decimal number
         it('should throw an error for operator is a string decimal number', () => {
-            expect(() => calc(2, '3.5', 4)).toThrow('Invalid input type');
+            expect(() => calc(2, '3.5', 4)).toThrow('Invalid operator');
         });
-        
 
+        // test case: string number in the middle
+        it('should throw an error for string number in the middle', () => {
+            expect(() => calc(2, '+', 5 , '*', '4' , '/' , 0)).toThrow('Invalid input type');
+        });
+    });
+    describe('Numbers greater than 1000', () => {
+        // Test case: Numbers greater than 1000
+        it('should ignore numbers greater than 1000', () => {
+            expect(calc(1001, '+', 2)).toBe(2);
+        });
+    });
+    // Test case: Empty input
+    describe('Empty input', () => {
+        it('should throw an error for empty input', () => {
+            expect(() => calc()).toThrow('Invalid input');
+        });
+    });
 
-
+    // Test case: multiple numbers greater than 1000
+    describe('Multiple numbers greater than 1000', () => {
+        it('should ignore numbers greater than 1000', () => {
+            expect(calc(1001, '+', 1001)).toBe(0);
+        });
+    });
+    // Test case: multiple numbers greater than 1000
+    describe('Multiple numbers greater than 1000 with also numbers les than zero', () => {
+        it('should ignore numbers greater than 1000', () => {
+            expect(calc(1001, '+', 2 , '-' ,1, '*', 1002 )).toBe(1);
+        });
+    });
+    // Test case: multiple numbers greater than 1000
+    describe('Multiple numbers greater than 1000 with also numbers les than zero', () => {
+        it('should ignore numbers greater than 1000', () => {
+            expect(calc( 2 , '-' ,10005, '*', 1002 )).toBe(2);
+        });
     });
 
 });
