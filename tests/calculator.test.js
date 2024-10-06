@@ -48,10 +48,13 @@ describe('Calculator', () => {
         it('should follow the correct order of operations', () => {
             expect(calc(2, '+', 3, '*', 4)).toBe(14);
         });
+        it('should follow the correct order of operations', () => {
+            expect(calc(2, '*', 3, '+', 4)).toBe(10);
+        });
     });
 
     // Test case: Invalid operator
-    describe('Invalid Operator', () => {
+    describe('Invalid input', () => {
         it('should throw an error for an invalid operator', () => {
             expect(() => calc(5, '$', 3)).toThrow('Invalid operator');
         });
@@ -59,6 +62,62 @@ describe('Calculator', () => {
         it('should throw an error for invalid input types', () => {
             expect(() => calc('2', '+', 3)).toThrow('Invalid input type');
         });
+        // Test case: Invalid input
+        it('should throw an error for invalid input', () => {
+            expect(() => calc(2, '+', 3, 3, 3)).toThrow('Invalid input');
+        });
+        // Test case: Less than 3 arguments
+        it('should throw an error for less than 3 arguments', () => {
+            expect(() => calc(2)).toThrow('Invalid input');
+        });
+
+        // test case: all input is operators
+        it('should throw an error for all input is operators', () => {
+            expect(() => calc('+', '+', '+')).toThrow('Invalid input');
+        });
+
+        // test case: all input is numbers
+        it('should throw an error for all input is numbers', () => {
+            expect(() => calc(1, 2, 3)).toThrow('Invalid input');
+        });
+        // test case: all input is zeros
+        it('should return 0 for all input is zeros', () => {
+            expect(calc(0, 0, 0)).toBe(0);
+        });
+
+        // test case: all operators are the same
+        it('should throw an error for all operators are the same', () => {
+            expect(() => calc(1, '+', '+')).toThrow('Invalid input');
+        });
+
+        // test case: operator is the first element
+        it('should throw an error for operator is the first element', () => {
+            expect(() => calc('+', 2, 3)).toThrow('Invalid input type');
+        });
+        
+        // test case: operator is the last element
+        it('should throw an error for operator is the last element', () => {
+            expect(() => calc(2, 3, '+')).toThrow('Invalid input type');
+        });
+
+        // test case: operator is the first and last element
+        it('should throw an error for operator is the first and last element', () => {
+            expect(() => calc('+', 2, 3, '+')).toThrow('Invalid input type');
+        });
+
+        // test case: operator is a decimal number
+        it('should throw an error for operator is a decimal number', () => {
+            expect(() => calc(2, 3.5, 4)).toThrow('Invalid input type');
+        });
+
+        // test case: operator is a string decimal number
+        it('should throw an error for operator is a string decimal number', () => {
+            expect(() => calc(2, '3.5', 4)).toThrow('Invalid input type');
+        });
+        
+
+
+
     });
 
 });

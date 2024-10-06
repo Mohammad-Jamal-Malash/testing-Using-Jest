@@ -8,6 +8,7 @@ function calculator(...args) {
         if (i % 2 === 0 && typeof args[i] !== 'number') {
             throw new Error('Invalid input type');
         }
+        
         if (typeof args[i] == 'number') {
             num = args[i] % 1001;
         } else {
