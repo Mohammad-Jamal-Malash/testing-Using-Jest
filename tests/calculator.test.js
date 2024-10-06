@@ -94,7 +94,7 @@ describe('Calculator', () => {
         it('should throw an error for operator is the first element', () => {
             expect(() => calc('+', 2, 3)).toThrow('Invalid input type');
         });
-        
+
         // test case: operator is the last element
         it('should throw an error for operator is the last element', () => {
             expect(() => calc(2, 3, '+')).toThrow('Invalid input type');
@@ -117,7 +117,7 @@ describe('Calculator', () => {
 
         // test case: string number in the middle
         it('should throw an error for string number in the middle', () => {
-            expect(() => calc(2, '+', 5 , '*', '4' , '/' , 0)).toThrow('Invalid input type');
+            expect(() => calc(2, '+', 5, '*', '4', '/', 0)).toThrow('Invalid input type');
         });
     });
     describe('Numbers greater than 1000', () => {
@@ -142,14 +142,18 @@ describe('Calculator', () => {
     // Test case: multiple numbers greater than 1000
     describe('Multiple numbers greater than 1000 with also numbers les than zero', () => {
         it('should ignore numbers greater than 1000', () => {
-            expect(calc(1001, '+', 2 , '-' ,1, '*', 1002 )).toBe(1);
+            expect(calc(1001, '+', 2, '-', 1, '*', 1002)).toBe(1);
         });
     });
     // Test case: multiple numbers greater than 1000
     describe('Multiple numbers greater than 1000 with also numbers les than zero', () => {
         it('should ignore numbers greater than 1000', () => {
-            expect(calc( 2 , '-' ,10005, '*', 1002 )).toBe(2);
+            expect(calc(2, '-', 10005, '*', 1002)).toBe(2);
         });
     });
-
+    describe("Floating Point Numbers", () => {
+        expect(calc(-1.5, '*', 4)).toBe(-6);
+        expect(calc(2, '/', -2)).toBe(-1);
+        expect(calc(-3, '-', -2)).toBe(-1);
+    });
 });
